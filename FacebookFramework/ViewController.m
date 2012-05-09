@@ -323,26 +323,18 @@
 }
 
 - (void)postWallPhotoClick {
-////    [self showActivityIndicator];
+  
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-//
-//    // Download a sample photo
-    NSURL *url = [NSURL URLWithString:@"http://www.nicboo.com/sites/default/files/field/image/iphone-apple.png"];
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    UIImage *img  = [[UIImage alloc] initWithData:data];
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   @"My test app", @"name",
-                                   img, @"picture",
-                                   @"FBTestApp app for iPhone!", @"caption",
-                                   @"This is a description of my app", @"description",
-                                   @"Hello!\n\nThis is a test message\nfrom my test iPhone app!", @"message",              
+    
+    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                   @"http://www.nicboo.com/sites/default/files/field/image/iphone-apple.png", @"picture",
+                                   @"My Testing", @"name",
+                                   @"mensaje",  @"message",
+                                   @"descripcion", @"description",
                                    nil];
     
-    [img release];
+    [[delegate facebook] dialog:@"feed" andParams:params andDelegate:self];
     
-    [[delegate facebook] requestWithGraphPath:@"me/feed" andParams:params andHttpMethod:@"POST" andDelegate:self];   
-
-
 }
 
 
