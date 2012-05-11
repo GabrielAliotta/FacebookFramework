@@ -58,13 +58,12 @@
     [postWall addTarget:self action:@selector(postWallClick) forControlEvents:UIControlEventTouchUpInside];
     [postWall setTitle:@"Post in your wall" forState:UIControlStateNormal];    
     [self.view addSubview:postWall];
-    //[postWall setHidden:YES];
     
     // Post photo Button
     UIButton * postPhotoBnt = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
     postPhotoBnt.frame = CGRectMake(1 , 270, 318, 58);
     [postPhotoBnt addTarget:self action:@selector(postWallPhotoClick) forControlEvents:UIControlEventTouchUpInside];
-    [postPhotoBnt setTitle:@"Post a photo in your wall" forState:UIControlStateNormal];    
+    [postPhotoBnt setTitle:@"Post a photo link in your wall" forState:UIControlStateNormal];    
     [self.view addSubview:postPhotoBnt];
     
     // Logout Button

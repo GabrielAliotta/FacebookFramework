@@ -1,4 +1,9 @@
 Facebook ios sdk - Framework tutorial
+
+Features
+Post feeds on your wall.
+Post photo links on your wall.
+
 1.- To use the Framework tutorial you need to add an app to Facebook applications on developers.facebook.com and get the AppId
 2.- Open the Xcode project and put the AppId value on the const String kAppId
 3.- Now you can run the application and use the framework
