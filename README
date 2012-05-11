@@ -2,9 +2,10 @@ Facebook ios sdk - Framework tutorial
 
 Features
 Post feeds on your wall.
-Post photo links on your wall.
+Post Images on your wall.
+Post links on your wall.
 
 1.- To use the Framework tutorial you need to add an app to Facebook applications on developers.facebook.com and get the AppId
 2.- Open the Xcode project and put the AppId value on the const String kAppId
 3.- Now you can run the application and use the framework
-4.- If you need to post photos in your wall you have a method on class ViewController.m with name postWallPhotoClick, you need to override the mutable dictionary "params" with the values that you want picture, name, description, etc.
+4.- Images and links can be changed from ViewController.m class on methods postWallPhotoClick and postWallLinkClick

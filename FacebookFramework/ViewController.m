@@ -54,17 +54,24 @@
     
     // Post Button
     self.postWall = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
-    postWall.frame = CGRectMake(1 , 200, 318, 58);
+    postWall.frame = CGRectMake(1 , 200, 318, 38);
     [postWall addTarget:self action:@selector(postWallClick) forControlEvents:UIControlEventTouchUpInside];
     [postWall setTitle:@"Post in your wall" forState:UIControlStateNormal];    
     [self.view addSubview:postWall];
     
     // Post photo Button
     UIButton * postPhotoBnt = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
-    postPhotoBnt.frame = CGRectMake(1 , 270, 318, 58);
+    postPhotoBnt.frame = CGRectMake(1 , 250, 318, 38);
     [postPhotoBnt addTarget:self action:@selector(postWallPhotoClick) forControlEvents:UIControlEventTouchUpInside];
-    [postPhotoBnt setTitle:@"Post a photo link in your wall" forState:UIControlStateNormal];    
+    [postPhotoBnt setTitle:@"Post a photo in your wall" forState:UIControlStateNormal];    
     [self.view addSubview:postPhotoBnt];
+    
+    // Post Link Button
+    UIButton * postLinkBnt = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
+    postLinkBnt.frame = CGRectMake(1 , 300, 318, 38);
+    [postLinkBnt addTarget:self action:@selector(postWallLinkClick) forControlEvents:UIControlEventTouchUpInside];
+    [postLinkBnt setTitle:@"Post a Link in your wall" forState:UIControlStateNormal];    
+    [self.view addSubview:postLinkBnt];
     
     // Logout Button
     UIButton * logoutBnt = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
@@ -321,12 +328,39 @@
     [[delegate facebook] dialog:@"feed" andDelegate:self];
 }
 
-- (void)postWallPhotoClick {
-  
+- (void) postWallPhotoClick {
+    
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
+    // Replace with your image
+    NSURL *url = [NSURL URLWithString: 
+                  @"http://mobiledevelopertips.com/images/logo-iphone-dev-tips.png"];
+    UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL:url]];    
+    // Replace with your image
+    
+    
+    NSString *strMessage = @"This is the photo caption";
+    NSMutableDictionary* photosParams = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                         image,@"source",
+                                         strMessage,@"message",
+                                         nil];
+    
+    [[delegate facebook] requestWithGraphPath:@"me/photos"
+                                     andParams:photosParams
+                                 andHttpMethod:@"POST"
+                                   andDelegate:self];   
+}
+
+- (void)postWallLinkClick {
+    
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    //Link
+    NSString * link = @"https://www.google.com";
+    //
+    
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   @"http://www.nicboo.com/sites/default/files/field/image/iphone-apple.png", @"picture",
+                                   link, @"link",
                                    @"My Testing", @"name",
                                    @"mensaje",  @"message",
                                    @"descripcion", @"description",
