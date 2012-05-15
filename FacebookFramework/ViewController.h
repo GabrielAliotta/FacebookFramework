@@ -8,20 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-#import "FBConnect.h"
+@interface ViewController : UIViewController
 
-@interface ViewController : UIViewController <FBRequestDelegate,FBDialogDelegate, FBSessionDelegate>
-
-
-@property (nonatomic, strong) NSArray *permissions;
-@property (nonatomic, strong) UILabel *nameLabel;
-@property (nonatomic, strong) UIImageView *profilePhotoImageView;
-@property (nonatomic, strong) UIButton *loginButton;
-@property (nonatomic, strong) UIButton *postWall;
-
-- (void)showLoggedIn;
-- (void)showLoggedOut;
-- (void)apiFQLIMe;
 - (void)postWallClick;
 
 @end

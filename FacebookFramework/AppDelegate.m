@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "FacebookAPICall.h"
 #import "ViewController.h"
 
 const NSString* kAppId = @"181064745345632";
@@ -16,13 +16,10 @@ const NSString* kAppId = @"181064745345632";
 
 @synthesize window = _window;
 @synthesize viewController = _viewController;
-@synthesize facebook = _facebook;
-@synthesize userPermissions = _userPermissions;
+
 
 - (void)dealloc
 {
-    [_facebook release];
-    [_userPermissions release];
     [_window release];
     [_viewController release];
     [super dealloc];
@@ -30,23 +27,8 @@ const NSString* kAppId = @"181064745345632";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-       
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    
-    // Initialize Facebook
-    self.facebook = [[Facebook alloc] initWithAppId:[kAppId copy] andDelegate:_viewController];
-    
-    // Check and retrieve authorization information
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
-        _facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
-        _facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
-    }
-    
-    // Initialize user permissions
-    self.userPermissions = [[NSMutableDictionary alloc] initWithCapacity:1];
-    
-    self.viewController = [[[ViewController alloc] initWithNibName:@"ViewController" bundle:nil] autorelease];
+    self.viewController = [[[ViewController alloc] init] autorelease];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;
@@ -57,15 +39,14 @@ const NSString* kAppId = @"181064745345632";
     // it's a good practice to refresh the access token also when the app becomes active.
     // This gives apps that seldom make api calls a higher chance of having a non expired
     // access token.
-    [[self facebook] extendAccessTokenIfNeeded];
-}
-
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    return [self.facebook handleOpenURL:url];
+    [[FacebookAPICall sharedFacebookAPICall] applicationDidBecomeActive:application];
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    return [self.facebook handleOpenURL:url];
+    return [[FacebookAPICall sharedFacebookAPICall] application:application
+                                                        openURL:url
+                                              sourceApplication:sourceApplication
+                                                     annotation:annotation];
 }
 
 @end

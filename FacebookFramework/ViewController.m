@@ -7,22 +7,23 @@
 //
 
 #import "ViewController.h"
-#import "AppDelegate.h"
+#import "FacebookAPICall.h"
 
+@interface ViewController ()
+
+@property (nonatomic, strong) UILabel *nameLabel;
+@property (nonatomic, strong) UIImageView *profilePhotoImageView;
+@property (nonatomic, strong) UIButton *loginButton;
+@property (nonatomic, strong) UIButton *postWall;
+
+@end
 
 @implementation ViewController
 
-@synthesize permissions;
 @synthesize nameLabel;
 @synthesize profilePhotoImageView;
 @synthesize loginButton;
 @synthesize postWall;
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Release any cached data, images, etc that aren't in use.
-}
 
 #pragma mark - View lifecycle
 
@@ -33,9 +34,6 @@
     [view setBackgroundColor:[UIColor whiteColor]];
     self.view = view;
     [view release];
-    
-    // Initialize permissions
-    permissions = [[NSArray alloc] initWithObjects:@"read_stream", @"publish_stream",@"offline_access", nil];
     
     // Login Button
     self.loginButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
@@ -78,296 +76,50 @@
     logoutBnt.frame = CGRectMake(1 , 370, 318, 58);
     [logoutBnt addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
     [logoutBnt setTitle:@"Logout" forState:UIControlStateNormal];    
-    [self.view addSubview:logoutBnt];
-
-    
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    //[self.navigationController setNavigationBarHidden:YES animated:animated];
-    [super viewWillAppear:animated];
-    
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    if (![[delegate facebook] isSessionValid]) {
-        [self showLoggedOut];
-    } else {
-        [self showLoggedIn];
-    }
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return YES;
-}
-
-- (void)storeAuthData:(NSString *)accessToken expiresAt:(NSDate *)expiresAt {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:accessToken forKey:@"FBAccessTokenKey"];
-    [defaults setObject:expiresAt forKey:@"FBExpirationDateKey"];
-    [defaults synchronize];
+    [self.view addSubview:logoutBnt];    
 }
 
 
-#pragma - Private Helper Methods
+#pragma CALLS TO TPG FACEBOOK LIBRARY METHODS
 
-/**
- * Show the logged in menu
- */
-
-- (void)showLoggedIn {
-
-    [self apiFQLIMe];
-}
-
-/**
- * Show the logged in menu
- */
-
-- (void)showLoggedOut {
-    [loginButton setHidden:NO];
-    
-    // Get the profile image
-    [profilePhotoImageView setImage:nil];   
-
-}
-
-
-/**
- * Show the authorization dialog.
- */
 - (void)login {
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    if (![[delegate facebook] isSessionValid]) {
-        [loginButton setHidden:YES];  
-        [postWall setHidden:NO];
-        [[delegate facebook] authorize:permissions];
-    } else {        
-        [self showLoggedIn];
-    }
+    [[FacebookAPICall sharedFacebookAPICall] login];
+    [loginButton setHidden:YES];  
+    [postWall setHidden:NO];
+
 }
 
-/**
- * Invalidate the access token and clear the cookie.
- */
+
 - (void)logout {
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [[delegate facebook] logout];
-    
+    [[FacebookAPICall sharedFacebookAPICall] logout];
+    [loginButton setHidden:NO];
 }
-
-
-#pragma mark - Facebook API Calls
-/**
- * Make a Graph API Call to get information about the current logged in user.
- */
-- (void)apiFQLIMe {
-    // Using the "pic" picture since this currently has a maximum width of 100 pixels
-    // and since the minimum profile picture size is 180 pixels wide we should be able
-    // to get a 100 pixel wide version of the profile picture
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   @"SELECT uid, name, pic FROM user WHERE uid=me()", @"query",
-                                   nil];
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [[delegate facebook] requestWithMethodName:@"fql.query"
-                                     andParams:params
-                                 andHttpMethod:@"POST"
-                                   andDelegate:self];
-}
-
-- (void)apiGraphUserPermissions {
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [[delegate facebook] requestWithGraphPath:@"me/permissions" andDelegate:self];
-}
-
-#pragma mark - FBSessionDelegate Methods
-/**
- * Called when the user has logged in successfully.
- */
-- (void)fbDidLogin {
-    [self showLoggedIn];
-    
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [self storeAuthData:[[delegate facebook] accessToken] expiresAt:[[delegate facebook] expirationDate]];   
-
-}
-
--(void)fbDidExtendToken:(NSString *)accessToken expiresAt:(NSDate *)expiresAt {
-    NSLog(@"token extended");
-    [self storeAuthData:accessToken expiresAt:expiresAt];
-}
-
-/**
- * Called when the user canceled the authorization dialog.
- */
--(void)fbDidNotLogin:(BOOL)cancelled {
-}
-
-/**
- * Called when the request logout has succeeded.
- */
-- (void)fbDidLogout {
-    
-    // Remove saved authorization information if it exists and it is
-    // ok to clear it (logout, session invalid, app unauthorized)
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults removeObjectForKey:@"FBAccessTokenKey"];
-    [defaults removeObjectForKey:@"FBExpirationDateKey"];
-    [defaults synchronize];
-    
-    [self showLoggedOut];
-}
-
-/**
- * Called when the session has expired.
- */
-- (void)fbSessionInvalidated {
-    UIAlertView *alertView = [[UIAlertView alloc]
-                              initWithTitle:@"Auth Exception"
-                              message:@"Your session has expired."
-                              delegate:nil
-                              cancelButtonTitle:@"OK"
-                              otherButtonTitles:nil,
-                              nil];
-    [alertView show];
-    [alertView release];
-    [self fbDidLogout];
-}
-
-#pragma mark - FBRequestDelegate Methods
-/**
- * Called when the Facebook API request has returned a response.
- *
- * This callback gives you access to the raw response. It's called before
- * (void)request:(FBRequest *)request didLoad:(id)result,
- * which is passed the parsed response object.
- */
-- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
-    NSLog(@"received response");
-}
-
-/**
- * Called when a request returns and its response has been parsed into
- * an object.
- *
- * The resulting object may be a dictionary, an array or a string, depending
- * on the format of the API response. If you need access to the raw response,
- * use:
- *
- * (void)request:(FBRequest *)request
- *      didReceiveResponse:(NSURLResponse *)response
- */
-- (void)request:(FBRequest *)request didLoad:(id)result {
-    if ([result isKindOfClass:[NSArray class]]) {
-        result = [result objectAtIndex:0];
-    }
-    // This callback can be a result of getting the user's basic
-    // information or getting the user's permissions.
-    if ([result objectForKey:@"name"]) {
-        // If basic information callback, set the UI objects to
-        // display this.
-        nameLabel.text = [result objectForKey:@"name"];
-        // Get the profile image
-        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[result objectForKey:@"pic"]]]];
-        
-        // Resize, crop the image to make sure it is square and renders
-        // well on Retina display
-        float ratio;
-        float delta;
-        float px = 100; // Double the pixels of the UIImageView (to render on Retina)
-        CGPoint offset;
-        CGSize size = image.size;
-        if (size.width > size.height) {
-            ratio = px / size.width;
-            delta = (ratio*size.width - ratio*size.height);
-            offset = CGPointMake(delta/2, 0);
-        } else {
-            ratio = px / size.height;
-            delta = (ratio*size.height - ratio*size.width);
-            offset = CGPointMake(0, delta/2);
-        }
-        CGRect clipRect = CGRectMake(-offset.x, -offset.y,
-                                     (ratio * size.width) + delta,
-                                     (ratio * size.height) + delta);
-        UIGraphicsBeginImageContext(CGSizeMake(px, px));
-        UIRectClip(clipRect);
-        [image drawInRect:clipRect];
-        UIImage *imgThumb = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        [profilePhotoImageView setImage:imgThumb];
-        
-        [self apiGraphUserPermissions];
-    } else {
-        // Processing permissions information
-        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        [delegate setUserPermissions:[[result objectForKey:@"data"] objectAtIndex:0]];
-    }
-}
-
-/**
- * Called when an error prevents the Facebook API request from completing
- * successfully.
- */
-- (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
-    NSLog(@"Err message: %@", [[error userInfo] objectForKey:@"error_msg"]);
-    NSLog(@"Err code: %d", [error code]);
-}
-
-#pragma ApiCall
 
 - (void)postWallClick {
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [[delegate facebook] dialog:@"feed" andDelegate:self];
+    [[FacebookAPICall sharedFacebookAPICall] postMessageToWall];
 }
 
 - (void) postWallPhotoClick {
     
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    // Replace with your image
+    // IMAGE params
     NSURL *url = [NSURL URLWithString: 
                   @"http://mobiledevelopertips.com/images/logo-iphone-dev-tips.png"];
     UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL:url]];    
-    // Replace with your image
+    NSString * message = @"My Testing message";
     
-    
-    NSString *strMessage = @"This is the photo caption";
-    NSMutableDictionary* photosParams = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                         image,@"source",
-                                         strMessage,@"message",
-                                         nil];
-    
-    [[delegate facebook] requestWithGraphPath:@"me/photos"
-                                     andParams:photosParams
-                                 andHttpMethod:@"POST"
-                                   andDelegate:self];   
+    [[FacebookAPICall sharedFacebookAPICall] postImageToWall:image withMessage:message];
+
 }
 
-- (void)postWallLinkClick {
-    
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    //Link
+- (void)postWallLinkClick {    
+
+    //LINK params
     NSString * link = @"https://www.google.com";
-    //
+    NSString * title = @"My Testing Link";
+    NSString * message = @"My Testing Message";
+    NSString * description = @"My Testing description";    
     
-    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   link, @"link",
-                                   @"My Testing", @"name",
-                                   @"mensaje",  @"message",
-                                   @"descripcion", @"description",
-                                   nil];
-    
-    [[delegate facebook] dialog:@"feed" andParams:params andDelegate:self];
-    
+    [[FacebookAPICall sharedFacebookAPICall] postLinkToWall:link withTitle:title andMessage:message andDescription:description];    
 }
 
 
