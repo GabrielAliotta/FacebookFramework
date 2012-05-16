@@ -15,8 +15,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4ADE994C15235F240021FED2"
                BuildableName = "FacebookFramework.app"
-               BlueprintName = "FacebookFramework"
-               ReferencedContainer = "container:FacebookFramework.xcodeproj">
+               BlueprintName = "Facebook"
+               ReferencedContainer = "container:Facebook.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,8 +33,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4ADE996D15235F240021FED2"
                BuildableName = "FacebookFrameworkTests.octest"
-               BlueprintName = "FacebookFrameworkTests"
-               ReferencedContainer = "container:FacebookFramework.xcodeproj">
+               BlueprintName = "FacebookTests"
+               ReferencedContainer = "container:Facebook.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,8 +43,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4ADE994C15235F240021FED2"
             BuildableName = "FacebookFramework.app"
-            BlueprintName = "FacebookFramework"
-            ReferencedContainer = "container:FacebookFramework.xcodeproj">
+            BlueprintName = "Facebook"
+            ReferencedContainer = "container:Facebook.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -61,8 +61,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4ADE994C15235F240021FED2"
             BuildableName = "FacebookFramework.app"
-            BlueprintName = "FacebookFramework"
-            ReferencedContainer = "container:FacebookFramework.xcodeproj">
+            BlueprintName = "Facebook"
+            ReferencedContainer = "container:Facebook.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -79,8 +79,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4ADE994C15235F240021FED2"
             BuildableName = "FacebookFramework.app"
-            BlueprintName = "FacebookFramework"
-            ReferencedContainer = "container:FacebookFramework.xcodeproj">
+            BlueprintName = "Facebook"
+            ReferencedContainer = "container:Facebook.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

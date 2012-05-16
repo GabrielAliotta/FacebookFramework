@@ -75,21 +75,21 @@
 		4AB19C451562DFC7008CC5E8 /* FacebookAPICall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookAPICall.h; sourceTree = "<group>"; };
 		4AB19C461562DFC7008CC5E8 /* FacebookAPICall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookAPICall.m; sourceTree = "<group>"; };
 		4AB19C6F1562EC4E008CC5E8 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
-		4ADE994D15235F240021FED2 /* FacebookFramework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FacebookFramework.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4ADE994D15235F240021FED2 /* Facebook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Facebook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ADE995115235F240021FED2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4ADE995315235F240021FED2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4ADE995515235F240021FED2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		4ADE995915235F240021FED2 /* FacebookFramework-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FacebookFramework-Info.plist"; sourceTree = "<group>"; };
+		4ADE995915235F240021FED2 /* Facebook-Info.plist */ = {isa = PBXFileReference; path = "Facebook-Info.plist"; sourceTree = "<group>"; };
 		4ADE995B15235F240021FED2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4ADE995D15235F240021FED2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		4ADE995F15235F240021FED2 /* FacebookFramework-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FacebookFramework-Prefix.pch"; sourceTree = "<group>"; };
+		4ADE995F15235F240021FED2 /* Facebook-Prefix.pch */ = {isa = PBXFileReference; path = "Facebook-Prefix.pch"; sourceTree = "<group>"; };
 		4ADE996015235F240021FED2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4ADE996115235F240021FED2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4ADE996315235F240021FED2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		4ADE996415235F240021FED2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		4ADE996E15235F240021FED2 /* FacebookFrameworkTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacebookFrameworkTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4ADE996E15235F240021FED2 /* FacebookTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacebookTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ADE996F15235F240021FED2 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		4ADE997715235F250021FED2 /* FacebookFrameworkTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FacebookFrameworkTests-Info.plist"; sourceTree = "<group>"; };
+		4ADE997715235F250021FED2 /* FacebookTests-Info.plist */ = {isa = PBXFileReference; path = "FacebookTests-Info.plist"; sourceTree = "<group>"; };
 		4ADE997915235F250021FED2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4ADE997B15235F250021FED2 /* FacebookFrameworkTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FacebookFrameworkTests.h; sourceTree = "<group>"; };
 		4ADE997C15235F250021FED2 /* FacebookFrameworkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FacebookFrameworkTests.m; sourceTree = "<group>"; };
@@ -183,8 +183,8 @@
 			isa = PBXGroup;
 			children = (
 				4AB19C1A1562DDD0008CC5E8 /* Library */,
-				4ADE995715235F240021FED2 /* FacebookFramework */,
-				4ADE997515235F240021FED2 /* FacebookFrameworkTests */,
+				4ADE995715235F240021FED2 /* Facebook */,
+				4ADE997515235F240021FED2 /* FacebookTests */,
 				4ADE995015235F240021FED2 /* Frameworks */,
 				4ADE994E15235F240021FED2 /* Products */,
 			);
@@ -193,8 +193,8 @@
 		4ADE994E15235F240021FED2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4ADE994D15235F240021FED2 /* FacebookFramework.app */,
-				4ADE996E15235F240021FED2 /* FacebookFrameworkTests.octest */,
+				4ADE994D15235F240021FED2 /* Facebook.app */,
+				4ADE996E15235F240021FED2 /* FacebookTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -210,7 +210,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		4ADE995715235F240021FED2 /* FacebookFramework */ = {
+		4ADE995715235F240021FED2 /* Facebook */ = {
 			isa = PBXGroup;
 			children = (
 				4ADE996015235F240021FED2 /* AppDelegate.h */,
@@ -219,34 +219,36 @@
 				4ADE996415235F240021FED2 /* ViewController.m */,
 				4ADE995815235F240021FED2 /* Supporting Files */,
 			);
+			name = Facebook;
 			path = FacebookFramework;
 			sourceTree = "<group>";
 		};
 		4ADE995815235F240021FED2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4ADE995915235F240021FED2 /* FacebookFramework-Info.plist */,
+				4ADE995915235F240021FED2 /* Facebook-Info.plist */,
 				4ADE995A15235F240021FED2 /* InfoPlist.strings */,
 				4ADE995D15235F240021FED2 /* main.m */,
-				4ADE995F15235F240021FED2 /* FacebookFramework-Prefix.pch */,
+				4ADE995F15235F240021FED2 /* Facebook-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		4ADE997515235F240021FED2 /* FacebookFrameworkTests */ = {
+		4ADE997515235F240021FED2 /* FacebookTests */ = {
 			isa = PBXGroup;
 			children = (
 				4ADE997B15235F250021FED2 /* FacebookFrameworkTests.h */,
 				4ADE997C15235F250021FED2 /* FacebookFrameworkTests.m */,
 				4ADE997615235F250021FED2 /* Supporting Files */,
 			);
+			name = FacebookTests;
 			path = FacebookFrameworkTests;
 			sourceTree = "<group>";
 		};
 		4ADE997615235F250021FED2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4ADE997715235F250021FED2 /* FacebookFrameworkTests-Info.plist */,
+				4ADE997715235F250021FED2 /* FacebookTests-Info.plist */,
 				4ADE997815235F250021FED2 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -255,9 +257,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4ADE994C15235F240021FED2 /* FacebookFramework */ = {
+		4ADE994C15235F240021FED2 /* Facebook */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4ADE998015235F250021FED2 /* Build configuration list for PBXNativeTarget "FacebookFramework" */;
+			buildConfigurationList = 4ADE998015235F250021FED2 /* Build configuration list for PBXNativeTarget "Facebook" */;
 			buildPhases = (
 				4ADE994915235F240021FED2 /* Sources */,
 				4ADE994A15235F240021FED2 /* Frameworks */,
@@ -267,14 +269,14 @@
 			);
 			dependencies = (
 			);
-			name = FacebookFramework;
+			name = Facebook;
 			productName = FacebookFramework;
-			productReference = 4ADE994D15235F240021FED2 /* FacebookFramework.app */;
+			productReference = 4ADE994D15235F240021FED2 /* Facebook.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4ADE996D15235F240021FED2 /* FacebookFrameworkTests */ = {
+		4ADE996D15235F240021FED2 /* FacebookTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4ADE998315235F250021FED2 /* Build configuration list for PBXNativeTarget "FacebookFrameworkTests" */;
+			buildConfigurationList = 4ADE998315235F250021FED2 /* Build configuration list for PBXNativeTarget "FacebookTests" */;
 			buildPhases = (
 				4ADE996915235F240021FED2 /* Sources */,
 				4ADE996A15235F240021FED2 /* Frameworks */,
@@ -286,9 +288,9 @@
 			dependencies = (
 				4ADE997415235F240021FED2 /* PBXTargetDependency */,
 			);
-			name = FacebookFrameworkTests;
+			name = FacebookTests;
 			productName = FacebookFrameworkTests;
-			productReference = 4ADE996E15235F240021FED2 /* FacebookFrameworkTests.octest */;
+			productReference = 4ADE996E15235F240021FED2 /* FacebookTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -299,7 +301,7 @@
 			attributes = {
 				LastUpgradeCheck = 0420;
 			};
-			buildConfigurationList = 4ADE994715235F240021FED2 /* Build configuration list for PBXProject "FacebookFramework" */;
+			buildConfigurationList = 4ADE994715235F240021FED2 /* Build configuration list for PBXProject "Facebook" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -311,8 +313,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4ADE994C15235F240021FED2 /* FacebookFramework */,
-				4ADE996D15235F240021FED2 /* FacebookFrameworkTests */,
+				4ADE994C15235F240021FED2 /* Facebook */,
+				4ADE996D15235F240021FED2 /* FacebookTests */,
 			);
 		};
 /* End PBXProject section */
@@ -390,7 +392,7 @@
 /* Begin PBXTargetDependency section */
 		4ADE997415235F240021FED2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4ADE994C15235F240021FED2 /* FacebookFramework */;
+			target = 4ADE994C15235F240021FED2 /* Facebook */;
 			targetProxy = 4ADE997315235F240021FED2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -465,8 +467,8 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FacebookFramework/FacebookFramework-Prefix.pch";
-				INFOPLIST_FILE = "FacebookFramework/FacebookFramework-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "FacebookFramework/Facebook-Info.plist";
+				PRODUCT_NAME = Facebook;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -476,8 +478,8 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FacebookFramework/FacebookFramework-Prefix.pch";
-				INFOPLIST_FILE = "FacebookFramework/FacebookFramework-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "FacebookFramework/Facebook-Info.plist";
+				PRODUCT_NAME = Facebook;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -491,9 +493,9 @@
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "FacebookFramework/FacebookFramework-Prefix.pch";
-				INFOPLIST_FILE = "FacebookFrameworkTests/FacebookFrameworkTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "FacebookFramework/Facebook-Prefix.pch";
+				INFOPLIST_FILE = "FacebookFrameworkTests/FacebookTests-Info.plist";
+				PRODUCT_NAME = FacebookTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -508,9 +510,9 @@
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "FacebookFramework/FacebookFramework-Prefix.pch";
-				INFOPLIST_FILE = "FacebookFrameworkTests/FacebookFrameworkTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "FacebookFramework/Facebook-Prefix.pch";
+				INFOPLIST_FILE = "FacebookFrameworkTests/FacebookTests-Info.plist";
+				PRODUCT_NAME = FacebookTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -519,7 +521,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4ADE994715235F240021FED2 /* Build configuration list for PBXProject "FacebookFramework" */ = {
+		4ADE994715235F240021FED2 /* Build configuration list for PBXProject "Facebook" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4ADE997E15235F250021FED2 /* Debug */,
@@ -528,7 +530,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4ADE998015235F250021FED2 /* Build configuration list for PBXNativeTarget "FacebookFramework" */ = {
+		4ADE998015235F250021FED2 /* Build configuration list for PBXNativeTarget "Facebook" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4ADE998115235F250021FED2 /* Debug */,
@@ -537,7 +539,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4ADE998315235F250021FED2 /* Build configuration list for PBXNativeTarget "FacebookFrameworkTests" */ = {
+		4ADE998315235F250021FED2 /* Build configuration list for PBXNativeTarget "FacebookTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4ADE998415235F250021FED2 /* Debug */,
