@@ -85,7 +85,6 @@
 
 - (void)login {
     [[FacebookAPICall sharedFacebookAPICall] login];
-    [loginButton setHidden:YES];
     [postWall setHidden:NO];
 }
 
@@ -129,7 +128,7 @@
     
     UITextView * textView = [[UITextView alloc] init];
     textView.frame = CGRectMake(1 , 58, 320, 400);
-    [textView setText:@"Post in your wall button shows a dialog to post a message on your wall \n\n Post a photo in your wall button gets an image from URL http://mobiledevelopertips.com/images/logo-iphone-dev-tips.png and use the text 'My Testing Link' as a message to test the photo post \n\n Post link in your wall shows a dialog and use the web page of google 'www.google.com' and with title 'My testing Link' and description 'My testing description' to test the post of links in your wall"];
+    [textView setText:@"Post in your wall button shows a dialog to post a message on your wall \n\n Post a photo in your wall button gets an image from URL http://mobiledevelopertips.com/images/logo-iphone-dev-tips.png and use the text 'My Testing Link' as a message to test the photo post \n\n Post link in your wall shows a dialog and use the web page of google 'www.google.com' and with title 'My testing Link' and description 'My testing description' to test the post of links in your wall \n\n\n To logout Facebook use SSO on ios sdk, when you calling a logout from facebook app or from safari at www.facebook.com you logout from the test app either"];
     
     [infoView addSubview:textView];         
     [textView release];
