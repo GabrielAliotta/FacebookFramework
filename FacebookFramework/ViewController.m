@@ -11,10 +11,11 @@
 
 @interface ViewController ()
 
-@property (nonatomic, strong) UILabel *nameLabel;
-@property (nonatomic, strong) UIImageView *profilePhotoImageView;
-@property (nonatomic, strong) UIButton *loginButton;
-@property (nonatomic, strong) UIButton *postWall;
+@property (nonatomic, retain) UILabel *nameLabel;
+@property (nonatomic, retain) UIImageView *profilePhotoImageView;
+@property (nonatomic, retain) UIButton *loginButton;
+@property (nonatomic, retain) UIButton *postWall;
+@property (nonatomic, retain) UIView * infoView;
 
 @end
 
@@ -24,6 +25,7 @@
 @synthesize profilePhotoImageView;
 @synthesize loginButton;
 @synthesize postWall;
+@synthesize infoView;
 
 #pragma mark - View lifecycle
 
@@ -35,10 +37,16 @@
     self.view = view;
     [view release];
     
+    // Info Button
+    UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoDark];
+    infoButton.frame = CGRectMake(200 , 0, 150, 150);
+    [infoButton addTarget:self action:@selector(infoButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:infoButton];
+    
     // Login Button
     self.loginButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
     CGFloat xLoginButtonOffset = self.view.center.x - (318/2);
-    CGFloat yLoginButtonOffset = self.view.bounds.size.height - (400);
+    CGFloat yLoginButtonOffset = self.view.bounds.size.height - (370);
     loginButton.frame = CGRectMake(xLoginButtonOffset,yLoginButtonOffset,318,58);
     [loginButton addTarget:self
                     action:@selector(login)
@@ -69,14 +77,7 @@
     postLinkBnt.frame = CGRectMake(1 , 300, 318, 38);
     [postLinkBnt addTarget:self action:@selector(postWallLinkClick) forControlEvents:UIControlEventTouchUpInside];
     [postLinkBnt setTitle:@"Post a Link in your wall" forState:UIControlStateNormal];    
-    [self.view addSubview:postLinkBnt];
-    
-    // Logout Button
-    UIButton * logoutBnt = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
-    logoutBnt.frame = CGRectMake(1 , 370, 318, 58);
-    [logoutBnt addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
-    [logoutBnt setTitle:@"Logout" forState:UIControlStateNormal];    
-    [self.view addSubview:logoutBnt];    
+    [self.view addSubview:postLinkBnt];  
 }
 
 
@@ -84,15 +85,8 @@
 
 - (void)login {
     [[FacebookAPICall sharedFacebookAPICall] login];
-    [loginButton setHidden:YES];  
+    [loginButton setHidden:YES];
     [postWall setHidden:NO];
-
-}
-
-
-- (void)logout {
-    [[FacebookAPICall sharedFacebookAPICall] logout];
-    [loginButton setHidden:NO];
 }
 
 - (void)postWallClick {
@@ -107,7 +101,7 @@
     UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL:url]];    
     NSString * message = @"My Testing message";
     
-    [[FacebookAPICall sharedFacebookAPICall] postImageToWall:image withMessage:message];
+    [[FacebookAPICall sharedFacebookAPICall] postMessageToWall:message withImage:image];
 
 }
 
@@ -116,11 +110,37 @@
     //LINK params
     NSString * link = @"https://www.google.com";
     NSString * title = @"My Testing Link";
-    NSString * message = @"My Testing Message";
     NSString * description = @"My Testing description";    
     
-    [[FacebookAPICall sharedFacebookAPICall] postLinkToWall:link withTitle:title andMessage:message andDescription:description];    
+    [[FacebookAPICall sharedFacebookAPICall] postLinkToWall:link withTitle:title andDescription:description];    
 }
 
+- (void) infoButtonClick 
+{
+    infoView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
+    [infoView setBackgroundColor:[UIColor whiteColor]]; 
+    
+    // Go Back Button
+    UIButton * goBack= [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
+    goBack.frame = CGRectMake(1 , 5, 318, 38);
+    [goBack addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [goBack setTitle:@"Go Back" forState:UIControlStateNormal];    
+    [infoView addSubview:goBack];
+    
+    UITextView * textView = [[UITextView alloc] init];
+    textView.frame = CGRectMake(1 , 58, 320, 400);
+    [textView setText:@"Post in your wall button shows a dialog to post a message on your wall \n\n Post a photo in your wall button gets an image from URL http://mobiledevelopertips.com/images/logo-iphone-dev-tips.png and use the text 'My Testing Link' as a message to test the photo post \n\n Post link in your wall shows a dialog and use the web page of google 'www.google.com' and with title 'My testing Link' and description 'My testing description' to test the post of links in your wall"];
+    
+    [infoView addSubview:textView];         
+    [textView release];
+                                 
+    [self.view addSubview:infoView];
+    [infoView release];
+}
+
+-(void) goBack
+{
+    [infoView removeFromSuperview];
+}
 
 @end

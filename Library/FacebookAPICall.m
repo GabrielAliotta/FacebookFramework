@@ -13,7 +13,7 @@
 
 @interface FacebookAPICall () <FBRequestDelegate,FBDialogDelegate, FBSessionDelegate>
 
-@property (strong, nonatomic) NSMutableDictionary * userPermissions;
+@property (retain, nonatomic) NSMutableDictionary * userPermissions;
 
 @end
 
@@ -100,15 +100,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FacebookAPICall)
  * Called when the session has expired.
  */
 - (void)fbSessionInvalidated {
-    UIAlertView *alertView = [[UIAlertView alloc]
-                              initWithTitle:@"Auth Exception"
+    [[[[UIAlertView alloc]initWithTitle:@"Auth Exception"
                               message:@"Your session has expired."
-                              delegate:nil
-                              cancelButtonTitle:@"OK"
-                              otherButtonTitles:nil,
-                              nil];
-    [alertView show];
-    [alertView release];
+                             delegate:nil
+                    cancelButtonTitle:@"OK"
+                    otherButtonTitles:nil, nil] autorelease] show];
     [self fbDidLogout];
 }
 
@@ -153,7 +149,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FacebookAPICall)
     [_facebook dialog:@"feed" andDelegate:self];
 }
 
-- (void) postImageToWall:(UIImage *)image withMessage:(NSString *)message{
+- (void)postMessageToWall:(NSString *)message withImage:(UIImage *)image
+{
     
     NSMutableDictionary* imageParams = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                          image,@"source",
@@ -166,12 +163,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FacebookAPICall)
                                   andDelegate:self];   
 }
 
-- (void)postLinkToWall:(NSString *)link withTitle:(NSString *)title andMessage:(NSString *)message andDescription:(NSString *)description{
+- (void)postLinkToWall:(NSString *)link 
+                withTitle:(NSString *)title 
+           andDescription:(NSString *)description
+{
 
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                    link, @"link",
                                    title, @"name",
-                                   message,  @"message",
                                    description, @"description",
                                    nil];
     

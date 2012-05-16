@@ -13,17 +13,17 @@ extern const NSString* kAppId;
 
 @interface FacebookAPICall : NSObject <UIApplicationDelegate>
 
-@property (strong, nonatomic) Facebook * facebook;
+@property (retain, nonatomic) Facebook * facebook;
 
 + (FacebookAPICall *)sharedFacebookAPICall;
 
-- (void) login;
+- (void)login;
 - (void)logout;
 - (void)postMessageToWall;
-- (void) postImageToWall:(UIImage *)image withMessage:(NSString *)message;
+- (void)postMessageToWall:(NSString *)message withImage:(UIImage *)image;
 - (void)postLinkToWall:(NSString *)link 
-             withTitle:(NSString *)title 
-            andMessage:(NSString *)message 
-        andDescription:(NSString *)description;
+                withTitle:(NSString *)title 
+           andDescription:(NSString *)description;
+
 
 @end
